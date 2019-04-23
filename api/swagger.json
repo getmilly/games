@@ -1,122 +1,89 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "",
-      "version": "1.0.0",
-      "title": "Game",
-      "contact": {
-        "email": "help@getmilly.com.br"
-      }
-    },
-    "host": "game.getmilly.com.br",
-    "basePath": "/v1",
-    "tags": [
-      {
-        "name": "games",
-        "description": "Everything about games"
-      }
-    ],
-    "schemes": [
-      "https"
-    ],
-    "paths": {
-      "/games": {
-        "post": {
-          "tags": [
-            "games"
-          ],
-          "summary": "Creates a new game.",
-          "operationId": "createGame",
-          "description": "",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Game object to create a new game",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/GamePostRequest"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Game created successfully",
-              "schema": {
-                "$ref": "#/definitions/GamePostResponse"
-              }
-            },
-            "400": {
-              "description": "",
-              "schema": {
-                "$ref": "#/definitions/ApiResponse"
-              }
-            },
-            "422": {
-              "description": "",
-              "schema": {
-                "$ref": "#/definitions/ApiResponse"
-              }
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Game",
+    "contact": {
+      "email": "help@getmilly.com.br"
+    }
+  },
+  "host": "game.getmilly.com.br",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "games",
+      "description": "Everything about games"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/games": {
+      "post": {
+        "tags": [
+          "games"
+        ],
+        "summary": "Creates a new game.",
+        "operationId": "createGame",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Game object to create a new game",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GamePostRequest"
             }
           }
-        },
-        "get": {
-          "tags": [
-            "games"
-          ],
-          "summary": "Get all games",
-          "description": "get all games",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/GameGetRequest"
-                }
-              }
+        ],
+        "responses": {
+          "201": {
+            "description": "Game created successfully",
+            "schema": {
+              "$ref": "#/definitions/GamePostResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "422": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
             }
           }
         }
       },
-      "/games/{game_id}": {
-        "get": {
-          "tags": [
-            "games"
-          ],
-          "summary": "Get all games",
-          "description": "get all games",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "game_id",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "Game Id"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
+      "get": {
+        "tags": [
+          "games"
+        ],
+        "summary": "Get all games",
+        "description": "get all games",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
                 "$ref": "#/definitions/GameGetRequest"
               }
             }
@@ -124,70 +91,115 @@
         }
       }
     },
-    "securityDefinitions": {
-      "auth": {
-        "type": "oauth2",
-        "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-        "flow": "implicit"
-      },
-      "api_key": {
-        "type": "apiKey",
-        "name": "api_key",
-        "in": "header"
-      }
-    },
-    "definitions": {
-      "GameGetRequest": {
-        "type": "object",
-        "properties": {
-          "game_id": {
+    "/games/{game_id}": {
+      "get": {
+        "tags": [
+          "games"
+        ],
+        "summary": "Get all games",
+        "description": "get all games",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "game_id",
+            "in": "path",
+            "required": true,
             "type": "string",
-            "example": "e12a924f-f53e-4885-9d3b-b8f260c02172"
-          },
-          "name": {
-            "type": "string",
-            "example": "Ghostbusters"
-          },
-          "description": {
-            "type": "string",
-            "example": "solve bugs"
+            "description": "Game Id"
           }
-        }
-      },
-      "GamePostRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Ghostbusters"
-          },
-          "description": {
-            "type": "string",
-            "example": "solve bugs"
-          }
-        }
-      },
-      "GamePostResponse": {
-        "type": "object",
-        "properties": {
-          "game_id": {
-            "type": "string",
-            "example": "e12a924f-f53e-4885-9d3b-b8f260c02172"
-          }
-        }
-      },
-      "ApiResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "example": "INVALID_OFFSET"
-          },
-          "message": {
-            "type": "string",
-            "example": "Offset must be greater than zero."
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GameGetRequest"
+            }
           }
         }
       }
     }
+  },
+  "securityDefinitions": {
+    "auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit"
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "GameGetRequest": {
+      "type": "object",
+      "properties": {
+        "game_id": {
+          "type": "string",
+          "example": "e12a924f-f53e-4885-9d3b-b8f260c02172"
+        },
+        "name": {
+          "type": "string",
+          "example": "Ghostbusters"
+        },
+        "description": {
+          "type": "string",
+          "example": "solve bugs"
+        }
+      }
+    },
+    "GamePostRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Ghostbusters"
+        },
+        "description": {
+          "type": "string",
+          "example": "solve bugs"
+        },
+        "url_image": {
+          "type": "string",
+          "example": "https://image.com.br"
+        },
+        "start_at": {
+          "type": "string",
+          "example": "2019-04-22T12:00:00-03:00"
+        },
+        "end_at": {
+          "type": "string",
+          "example": "2019-05-22T12:00:00-03:00"
+        }
+      }
+    },
+    "GamePostResponse": {
+      "type": "object",
+      "properties": {
+        "game_id": {
+          "type": "string",
+          "example": "e12a924f-f53e-4885-9d3b-b8f260c02172"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "INVALID_OFFSET"
+        },
+        "message": {
+          "type": "string",
+          "example": "Offset must be greater than zero."
+        }
+      }
+    }
   }
+}
