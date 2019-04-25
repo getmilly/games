@@ -12,10 +12,10 @@ func main() {
 	server := api.ConfigureServer(settings, api.DefaultHealthChecks())
 
 	server.AddController(di.Def{
-		Name:  "app-controller",
+		Name:  "games-controller",
 		Scope: di.App,
 		Build: func(c di.Container) (interface{}, error) {
-			return controllers.NewAppController(), nil
+			return controllers.NewGamesController(), nil
 		},
 	})
 
