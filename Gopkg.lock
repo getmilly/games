@@ -34,8 +34,8 @@
 [[projects]]
   name = "github.com/getmilly/grok"
   packages = ["api","logging","models","mongodb"]
-  revision = "ff4209130c9e81ecae71a45c71d0a64f20813214"
-  version = "0.3.0"
+  revision = "ae5cf1bd35662118da5a4f157110e81216732d6e"
+  version = "0.3.1"
 
 [[projects]]
   branch = "master"
@@ -280,6 +280,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ac75947fb0dcf00f90764b29a46b62dad18492dca26d76444c004e00dd201e25"
+  inputs-digest = "9eecc46db553a05fd15efc19a3a50c73b0ebe7545b423705ef64d96d57113140"
   solver-name = "gps-cdcl"
   solver-version = 1
