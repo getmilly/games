@@ -1,13 +1,14 @@
 package services
 
 import (
+	"github.com/getmilly/games/pkg/entities"
 	"github.com/getmilly/games/pkg/models"
 	"github.com/getmilly/games/pkg/repositories"
 )
 
 //GameService ...
 type GameService interface {
-	Create(game models.Game)
+	Create(game models.Game) error
 	Find()
 	FindByID(gameID string)
 	Delete(gameID string)
@@ -27,7 +28,12 @@ func NewGameService(
 	}
 }
 
-func (service gameService) Create(game models.Game) {}
+func (service gameService) Create(game models.Game) error {
+
+	entity := new(entities.Game)
+
+	service.gameRepository.Insert()
+}
 
 func (service gameService) Find() {}
 
