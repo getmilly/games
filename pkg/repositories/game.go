@@ -5,12 +5,13 @@ import (
 
 	"github.com/getmilly/games/pkg/entities"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 //GameRepository ...
 type GameRepository interface {
-	Insert(entities.Game) error
+	Insert(*entities.Game) error
 	FindByID(ID string) (*entities.Game, error)
 }
 
@@ -27,8 +28,9 @@ func NewGameRepository(client *mongo.Client) GameRepository {
 }
 
 //Insert ...
-func (repository gameRepository) Insert(game entities.Game) error {
-	_, err := repository.collection.InsertOne(context.Background(), game)
+func (repository gameRepository) Insert(game *entities.Game) error {
+	res, err := repository.collection.InsertOne(context.Background(), game)
+	game.ID = res.InsertedID.(primitive.ObjectID)
 	return err
 }
 
@@ -38,17 +40,17 @@ func (repository gameRepository) FindByID(ID string) (*entities.Game, error) {
 
 	game := new(entities.Game)
 
-	result := repository.collection.FindOne(ctx, bson.M{
-		"game_id": ID,
-	})
+	objectID, err := primitive.ObjectIDFromHex(ID)
 
-	if result.Err() != nil {
-		return nil, result.Err()
+	if err != nil {
+		return nil, err
 	}
 
-	err := result.Decode(game)
+	err = repository.collection.FindOne(ctx, bson.M{
+		"_id": objectID,
+	}).Decode(game)
 
-	if err == mongo.ErrNoDocuments {
+	if err != nil {
 		return nil, err
 	}
 
